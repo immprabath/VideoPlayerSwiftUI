@@ -20,8 +20,6 @@ struct VideoPlayerView: UIViewControllerRepresentable {
         self.player = AVPlayer(url: videoURL)
     }
     
-    
-    
     func makeUIViewController(context: Context) -> AVPlayerViewController {
         let playerViewController = AVPlayerViewController()
         playerViewController.showsPlaybackControls = false
@@ -45,8 +43,7 @@ struct VideoPlayerView: UIViewControllerRepresentable {
 struct VideoView: View {
     
     @ObservedObject var viewModel: VideoPlayerViewModel
-    
-    
+
     var body: some View {
         VStack(spacing:0) {
             HStack{
@@ -62,7 +59,7 @@ struct VideoView: View {
             ZStack {
                 VideoPlayerView(videoURL: URL(string: viewModel.videos[viewModel.count].hlsURL)!,
                                 viewModel: viewModel)
-                    .frame(height: 300)
+                    .frame(height: 240)
                     .background(Color.red)
                 VideoControlView(
                     previousDisabled: viewModel.previousDisabled,
