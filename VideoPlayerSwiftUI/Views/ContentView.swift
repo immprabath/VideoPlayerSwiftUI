@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var videoViewModel = VideoPlayerViewModel(videoService: VideoServiceImplement())
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        VStack() {
+            if !videoViewModel.videos.isEmpty {
+                VideoView(viewModel: videoViewModel)
+            } else {
+                ProgressView("Loading...")
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
+        }
+        .onAppear() {
+            videoViewModel.fetchVideos()
+        }
+        .navigationBarTitle("Video Player", displayMode: .inline)
+        
     }
 }
 
